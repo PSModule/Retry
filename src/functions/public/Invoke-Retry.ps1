@@ -31,15 +31,15 @@
             & $Run
             break
         } catch {
-            Write-Host "The command:"
-            Write-Host $Run.ToString()
-            Write-Host "failed with error: $_"
+            Write-Warning "The command:"
+            Write-Warning $Run.ToString()
+            Write-Warning "failed with error: $_"
             & $Catch
             if ($i -eq $Count - 1) {
                 throw
             }
 
-            Write-Host "Retrying in $Delay seconds..."
+            Write-Warning "Retrying in $Delay seconds..."
             Start-Sleep -Seconds $Delay
         }
     }
