@@ -12,7 +12,7 @@ Describe 'Functions' {
         It 'Invoke-Retry -Count 5 -Delay 5 {...} should not throw' {
             {
                 Invoke-Retry -Count 5 -Delay 5 {
-                    Invoke-RestMethod -Uri 'hhttps://api.myip.com/'
+                    Invoke-RestMethod -Uri 'https://api.myip.com/'
                 }
             } | Should -Not -Throw
         }
