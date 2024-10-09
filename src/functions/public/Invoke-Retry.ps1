@@ -3,6 +3,11 @@
         .SYNOPSIS
         Runs a scriptblock with a retry mechanism.
 
+        .DESCRIPTION
+        Runs a scriptblock with a retry mechanism.
+        If the scriptblock fails, it will retry the scriptblock a number of times with a delay between each try.
+        If a catch scriptblock is provided, it will run that scriptblock if the scriptblock fails.
+
         .EXAMPLE
         Retry -Count 5 -Delay 5 -Run {
             Invoke-RestMethod -Uri 'https://api.myip.com/'
@@ -11,17 +16,25 @@
     [CmdletBinding()]
     [Alias('Retry')]
     param(
+        # The scriptblock to run
+        [Parameter(Mandatory)]
+        [scriptblock] $Run,
+
         # The number of tries to make
+        [Parameter()]
         [int] $Count = 3,
 
         # The delay between tries in seconds
-        [int]$Delay = 5,
-
-        # The scriptblock to run
-        [scriptblock] $Run,
+        [Parameter()]
+        [int] $Delay = 5,
 
         # A scriptblock to run if it fails
-        [scriptblock]$Catch = {}
+        [Parameter()]
+        [scriptblock] $Catch = {},
+
+        # A scriptblock to run after the scriptblock has run
+        [Parameter()]
+        [scriptblock] $Finally = {}
     )
 
     $ErrorActionPreference = 'Stop'
@@ -43,4 +56,5 @@
             Start-Sleep -Seconds $Delay
         }
     }
+    & $Finally
 }
