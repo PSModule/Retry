@@ -9,9 +9,13 @@
         If a catch scriptblock is provided, it will run that scriptblock if the scriptblock fails.
 
         .EXAMPLE
+        ```pwsh
         Retry -Count 5 -Delay 5 -Run {
             Invoke-RestMethod -Uri 'https://api.myip.com/'
         }
+        ```
+
+        Retries an API call 5 times with 5 reconds delay.
     #>
     [CmdletBinding()]
     [Alias('Retry')]
