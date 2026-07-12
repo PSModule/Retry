@@ -1,4 +1,6 @@
-﻿Describe 'Functions' {
+﻿#Requires -Modules @{ ModuleName = 'Pester'; ModuleVersion = '6.0.0'; MaximumVersion = '6.*' }
+
+Describe 'Functions' {
     Context 'Invoke-Retry' {
         It 'Invoke-Retry -Count 5 -Delay 5 {...} should not throw' {
             {
